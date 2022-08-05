@@ -1,0 +1,30 @@
+.body{
+    background-color: rgb(57, 57, 57);
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header__title{
+    color: white;
+    text-transform: uppercase;
+}
+
+.header__button button{
+    width: 20vw;
+    min-width: 140px;
+    height: 60px;
+}
+
+.garage__control_create,
+.garage__control_update{
+    
+    display: flex;
+}
+
