@@ -21,7 +21,7 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', 'png', 'svg'],
   },
 
   module: {
@@ -35,7 +35,7 @@ module.exports = {
 
       // Images
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
         type: 'asset/resource',
       },
 
