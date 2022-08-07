@@ -47,7 +47,14 @@ export function create_page(){
         </div>
         <div class="garage__main">
             <div class="garage__main_title"><h2></h2></div>
-            
+            <div class="garage__main_pagination">
+                <button class='prev-page' disabled><</button>
+                <h2>1</h2>
+                <button class ='next-page'>></button>
+            </div>
+            <div class = 'wrapper'>
+                <div class='garage__main_wrapper'></div>
+            </div>
         </div>
     </section>
     <section class="winners">

@@ -1,3 +1,4 @@
+import { garage } from "./main";
 
 export function update_car(){
 
@@ -7,12 +8,12 @@ export function update_car(){
         button.addEventListener('click',()=>{
 
             button.classList.toggle('btn_active')
-            console.log(button.parentElement.parentElement);
 
             let car = button.parentElement.parentElement;
             let brand = car.children[0].children[2];
             let car_color = car.children[1].children[2].children[0]
-            let id = car_color.children[0].id;
+            let id_svg = car_color.children[0].id;
+            let id = +car.id;
 
             const update_btn = document.querySelector('.update_car');
 
@@ -24,10 +25,20 @@ export function update_car(){
                     let input_color: HTMLInputElement = document.querySelector('#color-update');
                     let name: string = input_name.value;
                     let color: string = input_color.value;
+                    let body: any;
 
-                    if(name !== '') brand.innerHTML = name;   
+                    if(name !== '') {brand.innerHTML = name;
+                     body = {'id' : id,
+                            'name' : name,
+                            'color' : color};
+                        
 
-                        car_color.innerHTML = `<symbol xml:space="preserve" y="0" x="0" xmlns="http://www.w3.org/2000/svg" fill="${color}" id="${id}" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                    }else  {body = {'id' : id,
+                                'name' : brand.innerHTML,
+                                'color' : color};
+                            }
+
+                        car_color.innerHTML = `<symbol xml:space="preserve" y="0" x="0" xmlns="http://www.w3.org/2000/svg" fill="${color}" id="${id_svg}" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
                         <g>
                         <path fill="#${color}" d="M66 47.5c-.4-.5-5.1 0-5.7 0H22.9c-1.8 0-4.9.6-6.5 0 .8-2.5 3.4-3.9 5.7-5 6.5-3.1 13.3-5.7 20.3-7.6 10-2.8 16.1 2 22.5 11.1l1.1 1.5z"></path>
                         <path fill="#333" d="M62.3 46.2c-5.6-7.9-10.9-12.1-19.6-9.7-1.5.4-3 .9-4.5 1.4-.9.3-1.5 1.1-1.5 2l-.3 5.2c-.1 1.3 1 2.4 2.3 2.4h19.7c.5 0 4.7-.4 5 0l-1.1-1.3z"></path>
@@ -65,8 +76,18 @@ export function update_car(){
                     select_buttons.forEach(btn => {
                         btn.classList.remove('btn_active')
                     })
+
+                    update_car_api(id, body);
                 }
             })
         })
     })
 }
+
+const update_car_api = async (id: number, body: any) => (await fetch( `${garage}/${id}`, { 
+    method : 'PUT',
+    body: JSON.stringify(body),
+    headers: {
+        'Content-Type' : 'application/json'
+    } ,
+})).json();

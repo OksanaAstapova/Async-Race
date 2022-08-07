@@ -1,5 +1,5 @@
 import { garage } from "./main";
-import { count_garage } from "./utils";
+import { count_garage } from "./create-default";
 
 export function remove_car(){
 

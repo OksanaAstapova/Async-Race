@@ -1,18 +1,21 @@
-import { count_garage } from "./utils";
+import { car_drive } from "./driving";
+import { garage } from "./main";
 import { remove_car } from "./remove-car";
 import { update_car } from "./update-car";
 
 
+
 export async function create_default(){
     const dataCars = async () => {
-        const response = await fetch('http://127.0.0.1:3000/garage');
+        const response = await fetch(`${garage}`);
         const data = (await response.json());
         return data;
     };
-
+    
+    
     const cars = await dataCars();
+    
     console.log(cars)
-
 
     for (let i = 0; i < cars.length; i++) {
         const car = cars[i];
@@ -21,14 +24,15 @@ export async function create_default(){
         count_garage();
         remove_car();
         update_car();
+        car_drive();
 
     }
-       
+   
 }
 
 export function create_car(id: number, name: string, color: string){
 
-  const garage = document.querySelector('.garage__main')
+  const garage = document.querySelector('.garage__main_wrapper')
 
   const car_wrapper: string = `<div class='car-wrapper' id='${id}'><div class='upper-panel'>
         <button class='select'>Select</button>
@@ -37,7 +41,7 @@ export function create_car(id: number, name: string, color: string){
         </div>
         <div class='car-panel'>
         <button class='A'>A</button>
-        <button class='B'>B</button>
+        <button class='B' disabled>B</button>
         <div class='car'><svg width="0" height="0" class="hidden">
         <symbol xml:space="preserve" y="0" x="0" xmlns="http://www.w3.org/2000/svg" fill="${color}" id="sports car${id}" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
           <g>
@@ -80,8 +84,19 @@ export function create_car(id: number, name: string, color: string){
         </div>
         <div class='trace-panel'>
         <div class='trace'></div>
-        <div class='finish'><img src='finish.png'></div></div></div>`
+        <div class='finish' id = 'finish-${id}'><img src='finish.png'></div></div></div>`
 
         garage.innerHTML += car_wrapper;
 }
+
+export function count_garage(){
+  
+  const count = document.querySelector('.garage__main_wrapper').childElementCount;
+  let title: HTMLElement = document.querySelector('.garage__main_title h2')
+  title.innerHTML = `Garage (${count})`;
+
+}
+
+
+
 

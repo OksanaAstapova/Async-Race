@@ -1,19 +1,27 @@
-import { create_car } from "./create-default";
-import { random_name } from "./generate-cars";
+import { create_car, count_garage } from "./create-default";
 import { garage } from "./main";
+import { brandsCars, modelsCars } from "./random-cars";
 import { remove_car } from "./remove-car";
 import { update_car } from "./update-car";
-import { count_garage } from "./utils";
 
 export function create_your_car(){
 
-    const garage = document.querySelector('.garage__main');
     let input: HTMLInputElement = document.querySelector('#name-car');
     let color_bar: HTMLInputElement = document.querySelector('#color-car');
     let model: string;
     
-    if(input.value === ''){model = random_name}
-    else model = input.value;
+    let i: number = Math.floor(Math.random()*brandsCars.length);
+    let randomBrand: string = brandsCars[i];
+
+    let k: number = Math.floor(Math.random()*modelsCars.length);
+    let randomModel: string = modelsCars[k];
+
+    let random_name: string = `${randomBrand} ${randomModel}`;
+    
+    if(input.value === ''){model = random_name;
+        console.log(random_name)
+    }
+    else {model = input.value;}
     
     let color: string = color_bar.value;
     let id_stack: number[] = [];
@@ -39,7 +47,7 @@ export function create_your_car(){
     remove_car();
 }
 
-const create_car_api = async (body: any) => (await fetch( garage, { 
+export const create_car_api = async (body: any) => (await fetch( garage, { 
     method : 'POST',
     body: JSON.stringify(body),
     headers: {

@@ -108,3 +108,18 @@ button:active{
     color: red;
     text-shadow: 1px 0px black;
 }
+
+/* .garage__main{
+    height: 1000px;
+} */
+.garage__main_pagination{
+    display: flex;
+    margin: 0 0 30px 23px;
+    align-items: center;
+    gap: 10px;
+}
+
+.wrapper{
+    height: 955.15px;
+    overflow: hidden;
+}
