@@ -1,6 +1,7 @@
 import { create_default } from "./create-default";
 import { create_page } from "./create-page";
 import { start_race } from "./driving";
+import { get_winners } from "./winners";
 
 export const base = 'http://localhost:3000';
 export const garage = `${base}/garage`
@@ -20,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('.winners').classList.add('active');
         garage_btn.classList.remove('btn_active')
         winners_btn.classList.add('btn_active')
+        get_winners();
+
 
     })
 

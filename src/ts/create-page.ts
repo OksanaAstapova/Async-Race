@@ -64,11 +64,16 @@ export function create_page(){
         </div>
     </section>
     <section class="winners">
-        <div class="winners__title"><h1>Winners</h1></div>
+        <div class="winners__title"><h1></h1></div>
+        <div class="page_winners"><button disabled><</button><h2>Page (1)</h2><button disabled>></button></div>
         <div class="winners__wrapper">
-            <table>
-
-            </table>
+        <table class = 'table'>
+        <tr class = 'header-table'>
+         <th>N</th><th>Winner</th><th>Wins</th><th>Time</th>
+        </tr>
+        
+       </table>
+       <img class='img' src='winners.png'></img>
         </div>
     </section> 
     </main>`

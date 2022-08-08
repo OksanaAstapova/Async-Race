@@ -11,7 +11,7 @@ export function car_drive(){
         const car = B.nextElementSibling as HTMLBodyElement;
 
         A.addEventListener('click', () => {
-
+           
             B.disabled = false;
             A.disabled = true;
             // console.log(car)
@@ -55,14 +55,12 @@ export function start_race(){
             duration = +(duration.toFixed(3))
             
             race.push(duration);
-            console.log(race)
             car.classList.add('animated')
 
             car.style.animationDuration = `${duration}s`; 
         }
 
         let fastest = Math.min.apply(null, race);
-            console.log(fastest)
         let win = 0;
 
         for (let i = 0; i < cars.length; i++) {
@@ -72,13 +70,17 @@ export function start_race(){
                 
                 const id = +car.id
                 win++;
+                
+                const name_wrapper = car.parentElement.parentElement.children[0].children[2]
+                const name = name_wrapper.innerHTML;
+
                 const winner = {
                     id: id,
+                    name: name,
                     wins: win,
                     time: fastest,
                 }
-                const name_wrapper = car.parentElement.parentElement.children[0].children[2]
-                const name = name_wrapper.innerHTML;
+
                 const modal_body = document.querySelector('.modal-winner__body');
 
                 create_winner_api(winner);
@@ -121,7 +123,6 @@ export function start_race(){
             car.classList.remove('animated');
             const id = +car.id;
 
-            // delete_winners_api(id);
 
         }
     })
@@ -136,5 +137,5 @@ const create_winner_api = async (winner: any) => (await fetch( winners, {
     } ,
 })).json();
 
-// const delete_winners_api = async (id: any) => (await fetch(`${winners}/${id}`, { method : 'DELETE' })).json();
+const delete_winners_api = async (id: any) => (await fetch(`${winners}/${id}`, { method : 'DELETE' })).json();
 
