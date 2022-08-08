@@ -55,6 +55,12 @@ export function create_page(){
             <div class = 'wrapper'>
                 <div class='garage__main_wrapper'></div>
             </div>
+            <div class='modal-winner'>
+                <button class='modal-winner__close'>X</button>
+                <h1 class='modal-winner__title'>The winner is</h1>
+                <div class='modal-winner__body'></div>
+            </div>
+            <div class='cover'></div>
         </div>
     </section>
     <section class="winners">

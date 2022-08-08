@@ -1,13 +1,16 @@
 import { create_default } from "./create-default";
 import { create_page } from "./create-page";
+import { start_race } from "./driving";
 
 export const base = 'http://localhost:3000';
 export const garage = `${base}/garage`
+export const winners = `${base}/winners`
 
 
 document.addEventListener("DOMContentLoaded", () => {
     create_page();
     create_default();
+    start_race();
 
     const garage_btn = document.querySelector('.button__garage');
     const winners_btn = document.querySelector('.button__winners');
@@ -36,6 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let x: number = 0;
     let num: number = 1;
     let count_cars: number = 7;
+
+    // if(garage.childElementCount <= 7){
+    //     next_btn.disabled = true;
+    //     prev_btn.disabled = true;
+    // }
    
 
     next_btn.addEventListener('click', () => {
@@ -46,10 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
         page.innerHTML = `${num}`;
         count_cars += 7;
         
-        if(garage.childElementCount <= count_cars){
+        if(garage.childElementCount <= 7){
             next_btn.disabled = true;
+            prev_btn.disabled = true;
         }
 
+        
+        if(garage.childElementCount <= count_cars){
+           
+            next_btn.disabled = true;
+        }
     })
 
     prev_btn.addEventListener('click', () => {

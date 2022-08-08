@@ -123,3 +123,79 @@ button:active{
     height: 955.15px;
     overflow: hidden;
 }
+
+.animated{
+    animation-name: car-drive;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes car-drive{
+
+    from{
+        margin-left: 0px;
+    }
+    to{
+        margin-left: 71vw;
+    }
+}
+
+.modal-winner{
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    width: 60vw;
+    height: 40vh;
+    border: 5px dashed black;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 0;
+    bottom: 0;
+    background-image: url(../assets/winner.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: white;
+    z-index: 5;
+    display: none;
+}
+
+    .modal-winner__close{
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        position: absolute;
+        right: 0;
+        border: 2px solid black;
+        font-size: 3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;    
+    }
+
+    .modal-winner__title{
+        font-size: 3em;
+        margin: 10px;
+        color: red;
+    }
+
+    .modal-winner__body h2{
+
+        font-size: 2em;
+        margin: 50px;
+    }
+
+
+    .cover{
+        background-color: rgba(0, 0, 0, 0.877);
+        position: absolute;
+        width: 100vw;
+        height: 1481.15px;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        display: none;
+    }

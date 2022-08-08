@@ -42,7 +42,7 @@ export function create_car(id: number, name: string, color: string){
         <div class='car-panel'>
         <button class='A'>A</button>
         <button class='B' disabled>B</button>
-        <div class='car'><svg width="0" height="0" class="hidden">
+        <div class='car' id='${id}'><svg width="0" height="0" class="hidden">
         <symbol xml:space="preserve" y="0" x="0" xmlns="http://www.w3.org/2000/svg" fill="${color}" id="sports car${id}" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
           <g>
             <path fill="#${color}" d="M66 47.5c-.4-.5-5.1 0-5.7 0H22.9c-1.8 0-4.9.6-6.5 0 .8-2.5 3.4-3.9 5.7-5 6.5-3.1 13.3-5.7 20.3-7.6 10-2.8 16.1 2 22.5 11.1l1.1 1.5z"></path>

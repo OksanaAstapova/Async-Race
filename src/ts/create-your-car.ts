@@ -1,4 +1,5 @@
 import { create_car, count_garage } from "./create-default";
+import { car_drive } from "./driving";
 import { garage } from "./main";
 import { brandsCars, modelsCars } from "./random-cars";
 import { remove_car } from "./remove-car";
@@ -45,6 +46,7 @@ export function create_your_car(){
     count_garage();
     update_car();
     remove_car();
+    car_drive()
 }
 
 export const create_car_api = async (body: any) => (await fetch( garage, { 
