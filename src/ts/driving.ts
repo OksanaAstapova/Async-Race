@@ -105,11 +105,7 @@ export function start_race(){
                     cover.style.display = 'none';
                 })
 
-                const button_winners = document.querySelector('.button__winners') as HTMLButtonElement;
-                button_winners.addEventListener('click', ()=>{
-                    car.classList.remove('animated')
-                })
-
+                
 
             }
         }
