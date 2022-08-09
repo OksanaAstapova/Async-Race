@@ -27,6 +27,11 @@ export async function create_default(){
         car_drive();
 
     }
+    const next_btn = document.querySelector('.next-page') as HTMLButtonElement;
+
+    if(cars.length > 7){
+      next_btn.disabled = false;
+  }
    
 }
 

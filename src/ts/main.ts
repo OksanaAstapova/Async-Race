@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     create_default();
     start_race();
 
-    const garage_btn = document.querySelector('.button__garage');
-    const winners_btn = document.querySelector('.button__winners');
+    const garage_btn = document.querySelector('.button__garage') as HTMLButtonElement;
+    const winners_btn = document.querySelector('.button__winners') as HTMLButtonElement;
 
     winners_btn.addEventListener('click', ()=>{
         document.querySelector('.garage').classList.remove('active');
@@ -22,8 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
         garage_btn.classList.remove('btn_active')
         winners_btn.classList.add('btn_active')
         get_winners();
+        const cars = document.querySelectorAll('.car');
 
-
+        cars.forEach(car =>{
+            car.classList.remove('animated')
+        })
     })
 
     garage_btn.addEventListener('click', ()=>{
@@ -34,6 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     })
 
+     
+    change_pages();
+
+    
+})
+
+export function change_pages(){
+
     const garage = document.querySelector('.garage__main_wrapper') as HTMLBodyElement;
     const prev_btn = document.querySelector('.prev-page') as HTMLButtonElement;
     const next_btn = document.querySelector('.next-page') as HTMLButtonElement;
@@ -43,12 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let num: number = 1;
     let count_cars: number = 7;
 
-    // if(garage.childElementCount <= 7){
-    //     next_btn.disabled = true;
-    //     prev_btn.disabled = true;
-    // }
-   
-
     next_btn.addEventListener('click', () => {
         if(prev_btn.disabled = true) prev_btn.disabled = false;
         x = x - 955.15;
@@ -56,6 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
         garage.style.marginTop = `${x}px`
         page.innerHTML = `${num}`;
         count_cars += 7;
+        let result = garage.childElementCount%7;
+        console.log(garage.childElementCount)
+        // console.log(result)
+        console.log(count_cars)
         
         if(garage.childElementCount <= 7){
             next_btn.disabled = true;
@@ -63,10 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         
-        if(garage.childElementCount <= count_cars){
-           
+        if(result === 0 || garage.childElementCount < count_cars){
             next_btn.disabled = true;
         }
+
+        
     })
 
     prev_btn.addEventListener('click', () => {
@@ -81,4 +91,5 @@ document.addEventListener("DOMContentLoaded", () => {
             prev_btn.disabled = true;
         }
     })
-})
+
+}

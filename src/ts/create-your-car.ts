@@ -1,6 +1,6 @@
 import { create_car, count_garage } from "./create-default";
 import { car_drive } from "./driving";
-import { garage } from "./main";
+import { change_pages, garage } from "./main";
 import { brandsCars, modelsCars } from "./random-cars";
 import { remove_car } from "./remove-car";
 import { update_car } from "./update-car";
@@ -32,7 +32,6 @@ export function create_your_car(){
         return id_stack.push(+car.id);
     })
     let max_id: number = Math.max.apply(null, id_stack);
-    console.log(max_id)
 
     let id = max_id + 1;
     
@@ -46,7 +45,7 @@ export function create_your_car(){
     count_garage();
     update_car();
     remove_car();
-    car_drive()
+    car_drive();
 }
 
 export const create_car_api = async (body: any) => (await fetch( garage, { 

@@ -57,7 +57,8 @@ export function start_race(){
             race.push(duration);
             car.classList.add('animated')
 
-            car.style.animationDuration = `${duration}s`; 
+            car.style.animationDuration = `${duration}s`;
+            car.style.marginLeft = '71vw' 
         }
 
         let fastest = Math.min.apply(null, race);
@@ -104,6 +105,11 @@ export function start_race(){
                     cover.style.display = 'none';
                 })
 
+                const button_winners = document.querySelector('.button__winners') as HTMLButtonElement;
+                button_winners.addEventListener('click', ()=>{
+                    car.classList.remove('animated')
+                })
+
 
             }
         }
@@ -122,6 +128,8 @@ export function start_race(){
         
             car.classList.remove('animated');
             const id = +car.id;
+            car.style.marginLeft = '0' 
+
 
 
         }

@@ -109,9 +109,9 @@ button:active{
     text-shadow: 1px 0px black;
 }
 
-/* .garage__main{
-    height: 1000px;
-} */
+.garage__main{
+    height: 1200px;
+}
 .garage__main_pagination{
     display: flex;
     margin: 0 0 30px 23px;
@@ -127,7 +127,7 @@ button:active{
 .animated{
     animation-name: car-drive;
     animation-duration: 5s;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards; */
 }
 
 @keyframes car-drive{

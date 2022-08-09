@@ -1,4 +1,4 @@
-import { garage } from "./main";
+import { change_pages, garage } from "./main";
 import { count_garage } from "./create-default";
 
 export function remove_car(){
@@ -9,10 +9,30 @@ export function remove_car(){
         button.addEventListener('click',()=>{
             let car = button.parentElement.parentElement;
             car.remove();
-            console.log(button.parentElement.parentElement);
+            count_garage()
 
-            count_garage();
             delete_car_api(car.id);
+            // change_pages();
+
+            let page = document.querySelector(".garage__main_pagination > h2");
+            const next_btn = document.querySelector('.next-page') as HTMLButtonElement;
+            const prev_btn = document.querySelector('.prev-page') as HTMLButtonElement;
+
+
+            const cars_per_page = +(page.innerHTML)*7;
+            console.log(cars_per_page)
+            const cars = document.querySelectorAll('.car-wrapper').length;
+            console.log(cars)
+            if(cars <= cars_per_page){next_btn.disabled = true}
+            else next_btn.disabled = false;
+
+            prev_btn.addEventListener('click', ()=>{
+                const prev_page = +(page.innerHTML);
+                console.log(page.innerHTML)
+                page.innerHTML = `${prev_page}`;
+            })
+
+
         })
     })
 }
