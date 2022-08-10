@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('.winners').classList.add('active');
         garage_btn.classList.remove('btn_active')
         winners_btn.classList.add('btn_active')
-        get_winners();
+        get_winners(1);
         const cars = document.querySelectorAll('.car');
 
         cars.forEach(car =>{

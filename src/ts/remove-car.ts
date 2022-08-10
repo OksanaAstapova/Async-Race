@@ -1,4 +1,4 @@
-import { change_pages, garage } from "./main";
+import { garage, winners } from "./main";
 import { count_garage } from "./create-default";
 
 export function remove_car(){
@@ -12,7 +12,7 @@ export function remove_car(){
             count_garage()
 
             delete_car_api(car.id);
-            // change_pages();
+            delete_winners_api(car.id);
 
             let page = document.querySelector(".garage__main_pagination > h2");
             const next_btn = document.querySelector('.next-page') as HTMLButtonElement;
@@ -38,3 +38,4 @@ export function remove_car(){
 }
 
 const delete_car_api = async (id: any) => (await fetch(`${garage}/${id}`, { method : 'DELETE' })).json();
+const delete_winners_api = async (id: any) => (await fetch(`${winners}/${id}`, { method : 'DELETE' })).json();

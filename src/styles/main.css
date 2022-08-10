@@ -86,6 +86,7 @@ button{
 
 .trace{
     width: 80vw;
+    max-width: 960px;
     border-bottom: 6px dashed black;
 }
 
@@ -127,7 +128,7 @@ button:active{
 .animated{
     animation-name: car-drive;
     animation-duration: 5s;
-    /* animation-fill-mode: forwards; */
+    animation-fill-mode: forwards;
 }
 
 @keyframes car-drive{
@@ -136,7 +137,7 @@ button:active{
         margin-left: 0px;
     }
     to{
-        margin-left: 71vw;
+        margin-left: 55vw;
     }
 }
 
@@ -202,6 +203,8 @@ button:active{
 
     .table{
         width: 60vw;
+        min-width: 477px;
+
         margin-top: 5vh;
     }
 
@@ -218,8 +221,8 @@ button:active{
     }
 
     .img{
-        width: 500px;
-        margin-left: calc(30vw - 250px);
+        width: 40vw;
+        margin-left: calc(50% - 20vw);
         margin-top: 100px;
     }
 

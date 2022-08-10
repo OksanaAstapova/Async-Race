@@ -66,7 +66,7 @@ export function create_page(){
     </section>
     <section class="winners">
         <div class="winners__title"><h1></h1></div>
-        <div class="page_winners"><button disabled><</button><h2>Page (1)</h2><button disabled>></button></div>
+        <div class="page_winners"><button id='left' disabled><</button><h2 id='page-number'>(1)</h2><button id='right' disabled>></button></div>
         <div class="winners__wrapper">
         <table class = 'table'>
                 

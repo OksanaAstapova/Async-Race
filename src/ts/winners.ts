@@ -5,41 +5,86 @@ declare global {
     interface Window { toggle_up_win: any; }
 }
 
-export async function get_winners(){
+export async function get_winners(page: number){
 
-const dataCars = async () => {
-    const response = await fetch(`${winners}`);
+    const dataCars = async (page: number, limit = 10) => {
+        const response = await fetch(`${winners}?_page=${page}&_limit=${limit}`);
         const data = (await response.json());
         return data;
     };
         
-    const cars = await dataCars();
+    const cars = await dataCars(page);
     createTable(cars);
+
+    const dataWinners = async () => {
+        const response = await fetch(`${winners}`);
+        const data = (await response.json());
+        return data;
+    };
+
+    const winners_data = await dataWinners();
+
+    const title = document.querySelector('.winners__title h1');
+    title.innerHTML = `Winners (${winners_data.length})`
+
+    const next = document.querySelector('#right') as HTMLButtonElement;
+    const prev = document.querySelector('#left')as HTMLButtonElement;
+    const page_number = document.querySelector('#page-number');
+
+    if(winners_data.length > 10){
+        if(next.disabled = true){next.disabled = false;}
+    }
+    let counter: number = 1;
+
+    next.addEventListener('click', async ()=>{
+        prev.disabled = false;
+        counter++;
+        page_number.innerHTML = `${counter}`
+        const cars2 = await dataCars(counter);
+        createTable(cars2);
+        if(cars2.length <= 10){next.disabled = true}
+    })
+    prev.addEventListener('click', async ()=>{
+        next.disabled = false;
+        counter--;
+        page_number.innerHTML = `${counter}`
+        const cars2 = await dataCars(counter);
+        createTable(cars2);
+        if(counter === 1){prev.disabled = true}
+    })
+    
+    
     const time = document.querySelector('#time');
     const win = document.querySelector('#wins');
 
     window.toggle_up = toggle_up;
     window.toggle_up_win = toggle_up_win;
 
-    function toggle_up_win(){
+    async function toggle_up_win(): Promise<void>{
         win.classList.toggle('time-up');
+        const num = +page_number.innerHTML;
+        let cars_num = await dataCars(num);
+
         if(win.classList.contains('time-up')){
-                       createTable(cars)
+                       createTable(cars_num)
             const img_up= document.querySelector('#up-win') as HTMLBodyElement;
 
             img_up.style.display = 'flex';
         }else{
-            createTable(cars)
+            createTable(cars_num)
             
             const img_down= document.querySelector('#down-win') as HTMLBodyElement;
                   img_down.style.display = 'flex';
         }
     }
-    function toggle_up(): void{
+
+    async function toggle_up(): Promise<void>{
         time.classList.toggle('time-up');
+        const num = +page_number.innerHTML;
+        let cars_num = await dataCars(num);
 
         if(time.classList.contains('time-up')){
-                  cars.sort(function (a: { time: number; }, b: { time: number; }) {
+                cars_num.sort(function (a: { time: number; }, b: { time: number; }) {
                     if (a.time > b.time) {
                       return 1;
                     }
@@ -48,11 +93,11 @@ const dataCars = async () => {
                     }
                     return 0;
                   });
-                  createTable(cars)
+                  createTable(cars_num);
                   const img_up= document.querySelector('#up') as HTMLBodyElement;
                   img_up.style.display = 'flex';
         }else{
-            cars.sort(function (a: { time: number; }, b: { time: number; }) {
+            cars_num.sort(function (a: { time: number; }, b: { time: number; }) {
                 if (a.time < b.time) {
                   return 1;
                 }
@@ -61,33 +106,12 @@ const dataCars = async () => {
                 }
                 return 0;
               });
-              createTable(cars)
+              createTable(cars_num);
               const img_down= document.querySelector('#down') as HTMLBodyElement;
-                  img_down.style.display = 'flex';
+            img_down.style.display = 'flex';
         }
         
     }
-
-    // time.classList.add('time-down');
-    // time.addEventListener('click', ()=>{
-    //     time.classList.toggle('time-up')
-
-    //     if(time.classList.contains('time-up')){
-    //       let cars_sort_up = cars.sort(function (a: { time: number; }, b: { time: number; }) {
-    //         if (a.time > b.time) {
-    //           return 1;
-    //         }
-    //         if (a.time < b.time) {
-    //           return -1;
-    //         }
-    //         return 0;
-    //       });
-    //       createTable(cars_sort_up)
-    //         const time = document.querySelector('#time');
-          
-    //         time.classList.add('time-up') 
-    //     }
-    // })
 }
 
 function createTable(cars: any){
@@ -99,9 +123,6 @@ function createTable(cars: any){
     for (let i = 0; i < cars.length; i++) {
         const car = cars[i];
 
-        const title = document.querySelector('.winners__title h1');
-        title.innerHTML = `Winners (${cars.length})`
-
         const row = `<tr class = 'row'>
         <td>${i+1}</td><td>${car.name}</td><td>${car.wins}</td><td class='time'>${car.time}</td>
        </tr>`
@@ -110,3 +131,4 @@ function createTable(cars: any){
         
     }
 }
+

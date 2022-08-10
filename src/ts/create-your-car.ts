@@ -1,6 +1,6 @@
 import { create_car, count_garage } from "./create-default";
 import { car_drive } from "./driving";
-import { change_pages, garage } from "./main";
+import { garage } from "./main";
 import { brandsCars, modelsCars } from "./random-cars";
 import { remove_car } from "./remove-car";
 import { update_car } from "./update-car";
@@ -19,8 +19,8 @@ export function create_your_car(){
 
     let random_name: string = `${randomBrand} ${randomModel}`;
     
-    if(input.value === ''){model = random_name;
-        console.log(random_name)
+    if(input.value === ''){
+        model = random_name;
     }
     else {model = input.value;}
     

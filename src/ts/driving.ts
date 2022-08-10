@@ -58,7 +58,7 @@ export function start_race(){
             car.classList.add('animated')
 
             car.style.animationDuration = `${duration}s`;
-            car.style.marginLeft = '71vw' 
+            car.style.marginLeft = '55vw' 
         }
 
         let fastest = Math.min.apply(null, race);
@@ -141,5 +141,4 @@ const create_winner_api = async (winner: any) => (await fetch( winners, {
     } ,
 })).json();
 
-const delete_winners_api = async (id: any) => (await fetch(`${winners}/${id}`, { method : 'DELETE' })).json();
 
