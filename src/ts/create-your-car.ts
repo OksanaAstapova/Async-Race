@@ -1,11 +1,24 @@
-import { create_car, count_garage } from "./create-default";
+import { create_car } from "./create-default";
 import { car_drive } from "./driving";
 import { garage } from "./main";
 import { brandsCars, modelsCars } from "./random-cars";
 import { remove_car } from "./remove-car";
 import { update_car } from "./update-car";
 
-export function create_your_car(){
+export const dataCars = async () => {
+    const response = await fetch(`${garage}`);
+    const data = (await response.json());
+    return data;
+};
+
+export async function create_your_car(){
+
+    const title: HTMLElement = document.querySelector('.garage__main_title h2');
+    
+
+    const cars_data = await dataCars();
+    title.innerHTML = `Garage (${cars_data.length+1})`
+
 
     let input: HTMLInputElement = document.querySelector('#name-car');
     let color_bar: HTMLInputElement = document.querySelector('#color-car');
@@ -27,8 +40,7 @@ export function create_your_car(){
     let color: string = color_bar.value;
     let id_stack: number[] = [];
 
-    let cars = document.querySelectorAll('.car-wrapper');
-    cars.forEach(car => {
+    cars_data.forEach((car: { id: string | number; }) => {
         return id_stack.push(+car.id);
     })
     let max_id: number = Math.max.apply(null, id_stack);
@@ -38,14 +50,26 @@ export function create_your_car(){
     let body = {'id' : id,
                 'name' : model,
                 'color' : color};
-
+    console.log(body)
    create_car(id, model, color);
    create_car_api(body);
 
-    count_garage();
     update_car();
     remove_car();
     car_drive();
+
+    console.log(cars_data.length+1)
+    const next_btn = document.querySelector('.next-page') as HTMLButtonElement;
+
+    const page_inner = document.querySelector('.garage__main_pagination h2').innerHTML;
+    const page = +page_inner
+
+    if(cars_data.length+1 <= 7){
+        next_btn.disabled = true;
+        console.log(cars_data.length+1 <= 7)
+    }
+    else{if(cars_data.length+1 > page*7){next_btn.disabled = false}
+    }
 }
 
 export const create_car_api = async (body: any) => (await fetch( garage, { 

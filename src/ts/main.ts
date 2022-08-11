@@ -7,7 +7,6 @@ export const base = 'http://localhost:3000';
 export const garage = `${base}/garage`
 export const winners = `${base}/winners`
 
-
 document.addEventListener("DOMContentLoaded", () => {
     create_page();
     create_default();
@@ -37,59 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     })
 
-     
-    change_pages();
-
+    
     
 })
-
-export function change_pages(){
-
-    const garage = document.querySelector('.garage__main_wrapper') as HTMLBodyElement;
-    const prev_btn = document.querySelector('.prev-page') as HTMLButtonElement;
-    const next_btn = document.querySelector('.next-page') as HTMLButtonElement;
-    
-    let page = document.querySelector('.garage__main_pagination h2');
-    let x: number = 0;
-    let num: number = 1;
-    let count_cars: number = 7;
-
-    next_btn.addEventListener('click', () => {
-        if(prev_btn.disabled = true) prev_btn.disabled = false;
-        x = x - 955.15;
-        num++
-        garage.style.marginTop = `${x}px`
-        page.innerHTML = `${num}`;
-        count_cars += 7;
-        let result = garage.childElementCount%7;
-        console.log(garage.childElementCount)
-        // console.log(result)
-        console.log(count_cars)
-        
-        if(garage.childElementCount <= 7){
-            next_btn.disabled = true;
-            prev_btn.disabled = true;
-        }
-
-        
-        if(result === 0 || garage.childElementCount < count_cars){
-            next_btn.disabled = true;
-        }
-
-        
-    })
-
-    prev_btn.addEventListener('click', () => {
-        if(next_btn.disabled = true) next_btn.disabled = false;
-        x = x + 955.15;
-        num--; 
-        garage.style.marginTop = `${x}px`
-        page.innerHTML = `${num}`;
-        count_cars -= 7;
-        
-        if(num === 1){
-            prev_btn.disabled = true;
-        }
-    })
-
-}

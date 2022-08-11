@@ -3,35 +3,100 @@ import { garage } from "./main";
 import { remove_car } from "./remove-car";
 import { update_car } from "./update-car";
 
-
+export const dataCars_page = async (page: number, limit = 7) => {
+  const response = await fetch(`${garage}?_page=${page}&_limit=${limit}`);
+  
+  return {
+    items: await response.json(),
+    count: response.headers.get('X-Total-Count')
+  }
+};
 
 export async function create_default(){
-    const dataCars = async () => {
-        const response = await fetch(`${garage}`);
-        const data = (await response.json());
-        return data;
-    };
     
+    const cars = await dataCars_page(1);
+    const cars_1 = cars.items;
+    const count = +cars.count
     
-    const cars = await dataCars();
-    
-    console.log(cars)
+    console.log(cars.count)
 
-    for (let i = 0; i < cars.length; i++) {
-        const car = cars[i];
+    for (let i = 0; i < cars_1.length; i++) {
+
+      const car = cars_1[i];
         
+      create_car(car.id, car.name, car.color);
+      remove_car();
+      update_car();
+      car_drive();
+
+    }
+
+    const prev_btn = document.querySelector('.prev-page') as HTMLButtonElement;
+    const next_btn = document.querySelector('.next-page') as HTMLButtonElement;
+    const page = document.querySelector('.garage__main_pagination h2');
+    const title: HTMLElement = document.querySelector('.garage__main_title h2');
+    const garage_wrapper = document.querySelector('.garage__main_wrapper')
+
+    let page_count: number = 1;
+
+    title.innerHTML = `Garage (<span class='count'>${count}</span>)`
+
+    if(count > 7){next_btn.disabled = false}
+
+    next_btn.addEventListener('click', async ()=>{
+      page_count++;
+      page.innerHTML = `${page_count}`;
+      prev_btn.disabled = false;
+      garage_wrapper.innerHTML = '';
+
+      const cars_2 = await dataCars_page(page_count);
+      const cars_per_page = cars_2.items;
+      console.log(cars_per_page)
+
+      for (let i = 0; i < cars_per_page.length; i++) {
+
+        const car = cars_per_page[i];
+          
         create_car(car.id, car.name, car.color);
-        count_garage();
         remove_car();
         update_car();
         car_drive();
+  
+      }
+      if(cars_per_page.length < 7){
+        next_btn.disabled = true;
+      }
+    })
 
+    prev_btn.addEventListener('click', async ()=>{
+      page_count--;
+      page.innerHTML = `${page_count}`;
+      prev_btn.disabled = false;
+      garage_wrapper.innerHTML = '';
+
+      const cars_2 = await dataCars_page(page_count);
+      const cars_per_page = cars_2.items;
+
+      for (let i = 0; i < cars_per_page.length; i++) {
+
+        const car = cars_per_page[i];
+          
+        create_car(car.id, car.name, car.color);
+        remove_car();
+        update_car();
+        car_drive();
+  
+      }
+
+      if(page_count == 1){
+      
+      prev_btn.disabled = true;
+      if(count > 7){next_btn.disabled = false}
     }
-    const next_btn = document.querySelector('.next-page') as HTMLButtonElement;
+    })
+    
 
-    if(cars.length > 7){
-      next_btn.disabled = false;
-  }
+
    
 }
 
@@ -94,13 +159,12 @@ export function create_car(id: number, name: string, color: string){
         garage.innerHTML += car_wrapper;
 }
 
-export function count_garage(){
+// export function count_garage(){
   
-  const count = document.querySelector('.garage__main_wrapper').childElementCount;
-  let title: HTMLElement = document.querySelector('.garage__main_title h2')
-  title.innerHTML = `Garage (${count})`;
+//   const count = document.querySelector('.garage__main_wrapper').childElementCount;
+//   title.innerHTML = `Garage (${count})`;
 
-}
+// }
 
 
 

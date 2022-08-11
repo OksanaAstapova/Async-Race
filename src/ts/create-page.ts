@@ -1,6 +1,6 @@
 import { generate_cars } from "./generate-cars";
 import { create_your_car } from "./create-your-car";
-import { change_pages } from "./main";
+// import { change_pages } from "./main";
 
 export function create_page(){
     const body = document.querySelector('.body');
@@ -53,9 +53,7 @@ export function create_page(){
                 <h2>1</h2>
                 <button class ='next-page' disabled>></button>
             </div>
-            <div class = 'wrapper'>
                 <div class='garage__main_wrapper'></div>
-            </div>
             <div class='modal-winner'>
                 <button class='modal-winner__close'>X</button>
                 <h1 class='modal-winner__title'>The winner is</h1>
@@ -90,14 +88,13 @@ export function create_page(){
     create_btn.addEventListener('click', ()=>{
     
         create_your_car();
-        change_pages();
+        // // change_pages();
 
-        const cars = document.querySelectorAll('.car-wrapper');
-        let result = cars.length % 7
-        console.log(result)
-        const next_btn = document.querySelector('.next-page') as HTMLButtonElement;
+        // const cars = document.querySelectorAll('.car-wrapper');
+        // let result = cars.length % 7
+        // const next_btn = document.querySelector('.next-page') as HTMLButtonElement;
 
-        if (result == 1){next_btn.disabled = false}
+        // if (result == 1){next_btn.disabled = false}
     })
 
 }

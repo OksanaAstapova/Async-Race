@@ -4,6 +4,11 @@ declare global {
     interface Window { toggle_up: any; }
     interface Window { toggle_up_win: any; }
 }
+export const dataWinners = async () => {
+    const response = await fetch(`${winners}`);
+    const data = (await response.json());
+    return data;
+};
 
 export async function get_winners(page: number){
 
@@ -15,12 +20,6 @@ export async function get_winners(page: number){
         
     const cars = await dataCars(page);
     createTable(cars);
-
-    const dataWinners = async () => {
-        const response = await fetch(`${winners}`);
-        const data = (await response.json());
-        return data;
-    };
 
     const winners_data = await dataWinners();
 

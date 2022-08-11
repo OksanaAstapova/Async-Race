@@ -1,12 +1,13 @@
-import { create_car, count_garage } from "./create-default";
+import { create_car} from "./create-default";
 import { create_car_api } from "./create-your-car";
-import { change_pages } from "./main";
+// import { change_pages } from "./main";
 import { brandsCars, modelsCars } from "./random-cars";
 import { remove_car } from "./remove-car";
 import { update_car } from "./update-car";
 
 
 export function generate_cars(){
+    window.location.reload();
     for (let car = 0; car < 100; car++) {
 
         let i: number = Math.floor(Math.random()*brandsCars.length);
@@ -32,9 +33,6 @@ export function generate_cars(){
                 
         create_car(id, random_name, random_color);
 
-        count_garage();
-
-        
         let body = {'id' : id,
                 'name' : random_name,
                 'color' : random_color};
@@ -43,5 +41,5 @@ export function generate_cars(){
     }
     remove_car();
     update_car(); 
-    change_pages();
+    // change_pages();
 }
